@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<!-- favicon img file -->
+<link rel="shortcut icon" href="static/img/favicon2.png">
+<!-- css file -->
+<link rel="stylesheet" 
+      href="static/css/mlstyle.css" 
+      charset="utf-8">
+<!-- jquery file -->
+<script type='text/javascript' src="static/js/jquery-1.11.3.js">
+</script>
+<html>
+  <title>ML Server</title>
+  <body>
+    <h1>Crystal Prediction</h1>
+
+    <!-- input panel -->
+    <div id="input" class="panel">
+      <h2 class="subtitle">Input panel</h2>
+      <!-- First objective  -->
+      <div class="container">
+        <h2 class="title">Single Point Prediction</h2>
+        <form id="ml_single" action="results" method="POST">
+          <label for="crystal" class="field-title"> 
+            Crystal component: 
+          </label>
+          <input id="crystal" type="text" 
+           name="crystal" class="atomList">
+          <input type="submit" name="form" value="Submit">
+        </form>
+      </div>
+  
+      <!-- Second objective  -->
+      <div class="container">
+        <h2 class="title">Group Prediction</h2>
+        <form id="ml_group" action="results" method="POST">
+          <label class="field-title" for="a1"> 
+            Elements in first position: 
+          </label>
+          <input id="a1" type="text" name="a1" class="atomList">
+          <label class="field-title" for="a2"> 
+            Elements in second position: 
+          </label>
+          <input id="a2" type="text" name="a2" class="atomList">
+          <label class="field-title" for="a3"> 
+            Elements in third position: 
+          </label>
+          <input id="a3" type="text" name="a3" class="atomList">
+          <label class="field-title" for="a4"> 
+            Elements in forth position: 
+          </label>
+          <input id="a4" type="text" name="a4" class="atomList">
+          <input type="submit" name="form" value="Submit">
+        </form>
+      </div>
+  
+      <!-- Third objective  -->
+      <div class="container">
+        <h2 class="title">Crystal Optimization</h2>
+        <form id="optimizer" action="results" method="POST">
+          <label class="field-title" for="include"> 
+            Required elements: 
+          </label>
+          <input id="include" type="text" 
+           name="include" class="atomList">
+          <label class="field-title" for="exclude"> 
+            Excluding elements: 
+          </label>
+          <input id="exclude" type="text" 
+           name="exclude" class="atomList">
+          <label class="field-title" for="target"> 
+             Target formation energy: 
+          </label>
+          <input id="target" type="text" 
+           name="target" class="numerical_input">
+          <input type="submit" name="form" value="Submit">
+        </form>
+      </div>
+    </div>
+    <!-- end of input panel -->
+
+    {% if result %}
+    <!-- output panel, only activated with result-->
+    <div id="output" class="panel">
+      <h2 class="subtitle">Output result</h2>
+
+      {% if result[0][1] %}
+        <div class="result">{{entry}}
+          <table>
+          <tr>
+          <td style="background-color: white">
+            Crystal string
+          </td>
+          <td style="background-color: white">
+            Formation energy [eV]
+          </td>
+          </tr>
+          {% for entry in result %}
+            <tr>
+              <td class="crystal" id="entry">{{entry[0]}}</td>
+              <td class="energy" id="entry">{{entry[1]}}</td>
+            </tr>
+          {% endfor %}
+          </table>
+        </div>
+      {% else %}
+        <div class="result">{{result[0][0]}}
+        </div>
+      {% endif %}
+
+    </div>
+    <!-- end of output panel -->
+    {% endif %}
+
+  <body>
+
+  <script type='text/javascript'>
+    /* inline figure wrapper */
+    /*
+    $(document).ready(function() {
+      $(".search_icon").each(function(){
+        $(this).add($(this).prev())
+          .wrapAll('<div class="imageInputWrapper"></div>');
+      }); 
+    });
+    */
+    /* show/hide focus function */
+    var mode = {{ mode }};
+    $(document).ready(function () {
+      if(mode == 1){
+        $("#ml_group").show();
+      }else if(mode ==2){
+        $("#optimizer").show();
+      }else{
+        $("#ml_single").show();
+      };
+    });
+    $(document).ready(function() {
+      $(".container").click(function(e) {
+        if($(e.target).is('h2')){
+          $(this).siblings('div').children("form").hide(200);
+          $(this).children("form").show(200);
+        }
+      });
+    });
+    
+    $(document).ready(function() {
+      $("#crystal").datepicker();
+    });
+  </script>
+</html>

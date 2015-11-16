@@ -1,0 +1,66 @@
+html {
+  font-family: sans-serif;
+}
+
+h2.subtitle {
+  color: gray;
+  font-size: 120%;
+}
+
+#input {
+  float: left;
+  width: 25%;
+  margin-left: 0.5%;
+}
+#output {
+  float: left;
+  width: 70%;
+}
+
+form {
+  display: none;
+}
+
+form .field-title {
+  display: block;
+}
+
+.imageInputWrapper{ 
+  display: block;
+}
+
+.search_icon{
+  width: 14px;
+  height: 14px;
+}
+
+input.atomList { 
+  margin-bottom:5px;
+  margin-right:5px;
+  display: block;
+}
+
+input.numerical_input { 
+  margin-bottom:5px;
+  margin-right:5px;
+  display: block;
+}
+
+.result {
+  width: 50%;
+  margin-bottom: 5px;
+}
+/*
+.crystal {
+  float: left;
+}
+*/
+tr:nth-child(even) {
+    background-color: #EEEEEE;
+}
+tr:nth-child(odd) {
+    background-color: #DDDDDD;
+}
+table {
+  width: 100%;
+}

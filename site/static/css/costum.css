@@ -1,0 +1,12 @@
+select:not([multiple]) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    padding: .5em;
+    padding-right: 1.5em
+}
+
+#ml_Select {
+    border-radius: 0
+}
