@@ -52,6 +52,7 @@ def plotData(target, popsize, cylList, step):
           tooltips=[
               ("Crystal", "@cylStr"),
               ("Energy", "@y"),
+              ("Generation", "@x"),
           ]
       )
   p = figure(tools=[hover], x_range=(0,step))
