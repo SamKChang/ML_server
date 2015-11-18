@@ -112,7 +112,7 @@
              Target formation energy: 
           </label>
           <input id="ml_target" type="text" 
-           value="-2"
+           value="-3"
            name="target" class="ml_setup">
           <label for="ml_step" class="ml_field-title">
             Iteration steps:
@@ -145,7 +145,7 @@
               Crystal string
             </td>
             <td style="background-color: white">
-              Formation energy per atom [eV]
+              Formation energy [eV/atom]
             </td>
             </tr>
             {% for entry in result %}
@@ -159,7 +159,9 @@
             </table>
           </div>
         {% else %}
-          <div class="ml_result">{{result[0][0]}}
+          <div class="ml_result" 
+               style="white-space: pre-wrap">
+            {{result[0][0]}}
           </div>
         {% endif %}
   
@@ -175,8 +177,7 @@
         </div>
       {% else %}
         <div id="ml_figures" class="ml_panel">
-          <h2 class="ml_subtitle">Crystal structure</h2>
-          <p>Crystal string: Al-Na-K-F</p>
+          <h2 class="ml_subtitle">Crystal string: Al-Na-K-F</h2>
           <img src="static/img/crystal.jpg" id="crystal_template">
         </div>
       {% endif %}

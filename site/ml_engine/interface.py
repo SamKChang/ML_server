@@ -30,14 +30,14 @@ def outputString(cylList):
           cylStr = cylStr + '-' + atom
       else:
         supported = False
-        cylStr = 'Element: %s is not supported yet..' % atom
+        cylStr = '\nElement: %s is not supported yet..' % atom
         break
     if supported and atom_count == 4:
       cylStrList.append(cylStr)
     elif atom_count == 4:
       cylStrList = cylStr
     else:
-      cylStrList = '4 elements must be specified..'
+      cylStrList = '\n4 elements must be specified..'
 
   # calculate output
   if supported and atom_count == 4 :

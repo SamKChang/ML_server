@@ -5,7 +5,6 @@ from flask import request
 from flask import render_template
 app = Flask(__name__)
 
-from init import app as app
 import ml_engine.converter as converter
 import ml_engine.interface as interface
 import ml_engine.dynamic_plot as pt
@@ -30,12 +29,17 @@ def inpProcessor():
     strList = ['a1', 'a2', 'a3', 'a4']
     for i in range(4):
       flag = strList[i]
-      atoms.append(
-        list(set(converter.stringConverter(request.form[flag])))
-      )
-    cylList = converter.groupConstructor(atoms)
-    # output processing
-    out = interface.outputString(cylList)
+      elist = list(set(
+        converter.stringConverter(request.form[flag])))
+      if len(elist) > 0:
+        atoms.append(
+          list(set(converter.stringConverter(request.form[flag])))
+        )
+        cylList = converter.groupConstructor(atoms)
+        # output processing
+        out = interface.outputString(cylList)
+      else:
+        out = [['\nEvery atom site must be specified.']]
   else:
     mode = 2
     # input processing
@@ -52,8 +56,10 @@ def inpProcessor():
     step = request.form['ml_step']
 
     out = interface.optimizer(target, popsize, cylList, step)
-    out = [['Optimizing crystals with target value: %f'\
-          % float(target)]]
+    out = [['\nOptimizing crystals with\n' +\
+            'target value: %.2f\n' % float(target) +\
+            'total generations: %d\n' % int(step) +\
+            'population size: %d\n' % int(popsize)]]
 
 
   return render_template("home.html", result=out, mode=mode)
