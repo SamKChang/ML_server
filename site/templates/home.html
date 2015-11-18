@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!-- favicon img file -->
-<link rel="shortcut icon" href="static/img/favicon2.png">
+<link rel="shortcut icon" href="static/img/glass.png">
 <!-- css file -->
 <link rel="stylesheet" 
       href="static/css/mlstyle.css" 
@@ -8,107 +8,177 @@
 <!-- jquery file -->
 <script type='text/javascript' src="static/js/jquery-1.11.3.js">
 </script>
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.css"
+    rel="stylesheet" type="text/css"
+>
+<script 
+    src="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.js"
+></script>
+<!--
+<link 
+      type="text/css" 
+      rel="stylesheet" 
+      href='http://cdn.pydata.org/bokeh-0.10.0.min.css' 
+/>
+<script type="text/javascript" src='http://cdn.pydata.org/bokeh-0.10.0.min.js'>
+</script>
+-->
 <html>
+  <meta charset="utf-8">
+  <html lang="en">
   <title>ML Server</title>
   <body>
     <h1>Crystal Prediction</h1>
 
     <!-- input panel -->
-    <div id="input" class="panel">
-      <h2 class="subtitle">Input panel</h2>
+    <div id="ml_input" class="ml_panel">
+      <h2 class="ml_subtitle">Input panel</h2>
       <!-- First objective  -->
-      <div class="container">
-        <h2 class="title">Single Point Prediction</h2>
-        <form id="ml_single" action="results" method="POST">
-          <label for="crystal" class="field-title"> 
+      <div class="ml_container">
+        <h2 class="ml_title">Single Point Prediction</h2>
+        <form id="ml_single" action="." method="POST">
+          <label for="crystal" class="ml_field-title"> 
             Crystal component: 
           </label>
           <input id="crystal" type="text" 
-           name="crystal" class="atomList">
-          <input type="submit" name="form" value="Submit">
+           placeholder="Al Na K F"
+           name="crystal" class="ml_atomList">
+          <input id="ml_btn" type="submit" name="form" value="Submit">
         </form>
       </div>
   
       <!-- Second objective  -->
-      <div class="container">
-        <h2 class="title">Group Prediction</h2>
-        <form id="ml_group" action="results" method="POST">
-          <label class="field-title" for="a1"> 
+      <div class="ml_container">
+        <h2 class="ml_title">Group Prediction</h2>
+        <form id="ml_group" action="." method="POST">
+          <label class="ml_field-title" for="a1"> 
             Elements in first position: 
           </label>
-          <input id="a1" type="text" name="a1" class="atomList">
-          <label class="field-title" for="a2"> 
+          <input id="a1" type="text" 
+           placeholder="Al"
+           name="a1" class="ml_atomList">
+          <label class="ml_field-title" for="a2"> 
             Elements in second position: 
           </label>
-          <input id="a2" type="text" name="a2" class="atomList">
-          <label class="field-title" for="a3"> 
+          <input id="a2" type="text" 
+           placeholder="Na"
+           name="a2" class="ml_atomList">
+          <label class="ml_field-title" for="a3"> 
             Elements in third position: 
           </label>
-          <input id="a3" type="text" name="a3" class="atomList">
-          <label class="field-title" for="a4"> 
+          <input id="a3" type="text" 
+           placeholder="K"
+           name="a3" class="ml_atomList">
+          <label class="ml_field-title" for="a4"> 
             Elements in forth position: 
           </label>
-          <input id="a4" type="text" name="a4" class="atomList">
-          <input type="submit" name="form" value="Submit">
+          <input id="a4" type="text" 
+           placeholder="F"
+           name="a4" class="ml_atomList">
+          <input id="ml_btn" type="submit" name="form" value="Submit">
         </form>
       </div>
   
       <!-- Third objective  -->
-      <div class="container">
-        <h2 class="title">Crystal Optimization</h2>
-        <form id="optimizer" action="results" method="POST">
-          <label class="field-title" for="include"> 
-            Required elements: 
+      <div class="ml_container">
+        <h2 class="ml_title">Crystal Optimization</h2>
+        <form id="ml_optimizer" action="." method="POST">
+          <label class="ml_field-title" for="oa1"> 
+            Elements in first position: 
           </label>
-          <input id="include" type="text" 
-           name="include" class="atomList">
-          <label class="field-title" for="exclude"> 
-            Excluding elements: 
+          <input id="oa1" type="text" 
+           placeholder="Al"
+           name="a1" class="ml_atomList">
+          <label class="ml_field-title" for="oa2"> 
+            Elements in second position: 
           </label>
-          <input id="exclude" type="text" 
-           name="exclude" class="atomList">
-          <label class="field-title" for="target"> 
+          <input id="oa2" type="text" 
+           placeholder="Na"
+           name="a2" class="ml_atomList">
+          <label class="ml_field-title" for="oa3"> 
+            Elements in third position: 
+          </label>
+          <input id="oa3" type="text" 
+           placeholder="K"
+           name="a3" class="ml_atomList">
+          <label class="ml_field-title" for="oa4"> 
+            Elements in forth position: 
+          </label>
+          <input id="oa4" type="text" 
+           placeholder="F"
+           name="a4" class="ml_atomList">
+          <label class="ml_field-title" for="ml_target"> 
              Target formation energy: 
           </label>
-          <input id="target" type="text" 
-           name="target" class="numerical_input">
-          <input type="submit" name="form" value="Submit">
+          <input id="ml_target" type="text" 
+           value="-2"
+           name="target" class="ml_setup">
+          <label for="ml_step" class="ml_field-title">
+            Iteration steps:
+          </label>
+          <input id="ml_step" type="text" 
+           value="100"
+           name="ml_step" class="ml_setup">
+          <label for="ml_pop" class="ml_field-title">
+            Population size:
+          </label>
+          <input id="ml_pop" type="text" 
+           value="50"
+           name="ml_pop" class="ml_setup">
+          <input id="ml_btn" type="submit" name="form" value="Submit">
         </form>
       </div>
     </div>
     <!-- end of input panel -->
 
     {% if result %}
-    <!-- output panel, only activated with result-->
-    <div id="output" class="panel">
-      <h2 class="subtitle">Output result</h2>
-
-      {% if result[0][1] %}
-        <div class="result">{{entry}}
-          <table>
-          <tr>
-          <td style="background-color: white">
-            Crystal string
-          </td>
-          <td style="background-color: white">
-            Formation energy [eV]
-          </td>
-          </tr>
-          {% for entry in result %}
+      <!-- output panel, only activated with result-->
+      <div id="ml_output" class="ml_panel">
+        <h2 class="ml_subtitle">Output result</h2>
+  
+        {% if result[0][1] %}
+          <div class="ml_result">{{entry}}
+            <table class="ml">
             <tr>
-              <td class="crystal" id="entry">{{entry[0]}}</td>
-              <td class="energy" id="entry">{{entry[1]}}</td>
+            <td style="background-color: white">
+              Crystal string
+            </td>
+            <td style="background-color: white">
+              Formation energy per atom [eV]
+            </td>
             </tr>
-          {% endfor %}
-          </table>
-        </div>
-      {% else %}
-        <div class="result">{{result[0][0]}}
+            {% for entry in result %}
+              <tr>
+                <td class="ml_crystal" 
+                    id="ml_entry">{{entry[0]}}</td>
+                <td class="ml_energy" 
+                    id="ml_entry">{{entry[1]}}</td>
+              </tr>
+            {% endfor %}
+            </table>
+          </div>
+        {% else %}
+          <div class="ml_result">{{result[0][0]}}
+          </div>
+        {% endif %}
+  
+      </div>
+      <!-- end of output panel -->
+
+      <!-- dynamic figures for optimizer -->
+      {% if mode == 2 %}
+        <div id="ml_figures" class="ml_panel">
+          <h2 class="ml_subtitle">Optimization progress</h2>
+          <!-- full bokeh html -->
+          {% include 'ajax_plot.html' %}
         </div>
       {% endif %}
-
-    </div>
-    <!-- end of output panel -->
+    {% else %}
+      <div id="ml_output">
+        <h2 class="ml_subtitle">Crystal template</h2>
+        <img src="static/img/crystal.jpg" id="crystal_template">
+      </div>
     {% endif %}
 
   <body>
@@ -119,32 +189,45 @@
     $(document).ready(function() {
       $(".search_icon").each(function(){
         $(this).add($(this).prev())
-          .wrapAll('<div class="imageInputWrapper"></div>');
+          .wrapAll('<div class="ml_imageInputWrapper"></div>');
       }); 
     });
     */
-    /* show/hide focus function */
+    /* show/hide focus function, takes flask 'mode' variable */
     var mode = {{ mode }};
     $(document).ready(function () {
       if(mode == 1){
         $("#ml_group").show();
       }else if(mode ==2){
-        $("#optimizer").show();
+        $("#ml_optimizer").show();
       }else{
         $("#ml_single").show();
       };
     });
-    $(document).ready(function() {
-      $(".container").click(function(e) {
+    $(document).ready(function() { // onclick response
+      $(".ml_container").click(function(e) {
         if($(e.target).is('h2')){
           $(this).siblings('div').children("form").hide(200);
           $(this).children("form").show(200);
         }
       });
     });
-    
-    $(document).ready(function() {
-      $("#crystal").datepicker();
-    });
   </script>
+
+  <script type="text/javascript" src="static/js/elementpicker.js">
+  </script>
+  <link rel="stylesheet" href="static/css/elementpicker.css" 
+      charset="utf-8">
+  <script type="text/javascript">
+    new elementpicker('crystal');
+    new elementpicker('a1');
+    new elementpicker('a2');
+    new elementpicker('a3');
+    new elementpicker('a4');
+    new elementpicker('oa1');
+    new elementpicker('oa2');
+    new elementpicker('oa3');
+    new elementpicker('oa4');
+  </script>
+
 </html>

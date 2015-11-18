@@ -2,65 +2,87 @@ html {
   font-family: sans-serif;
 }
 
-h2.subtitle {
+h2.ml_subtitle {
   color: gray;
   font-size: 120%;
 }
 
-#input {
+#ml_input {
   float: left;
   width: 25%;
   margin-left: 0.5%;
 }
-#output {
+#ml_output {
   float: left;
-  width: 70%;
+  width: 30%;
+}
+#ml_figures {
+  float: left;
+  width: 44%;
 }
 
 form {
   display: none;
 }
 
-form .field-title {
+form label.ml_field-title {
+  display: inline;
+}
+
+.ml_imageInputWrapper{ 
   display: block;
 }
 
-.imageInputWrapper{ 
-  display: block;
-}
-
-.search_icon{
+.ml_search_icon{
   width: 14px;
   height: 14px;
 }
 
-input.atomList { 
+input.ml_atomList { 
   margin-bottom:5px;
   margin-right:5px;
   display: block;
 }
 
-input.numerical_input { 
+.ml_setup {
+  display: none;
+}
+
+input.ml_setup { 
   margin-bottom:5px;
   margin-right:5px;
   display: block;
 }
 
-.result {
-  width: 50%;
+.ml_result {
+  width: 100%;
   margin-bottom: 5px;
 }
+
+#crystal_template {
+  width: 90%;
+  height: 90%;
+  max-width: 300px;
+  max-height: 300px;
+}
+
 /*
 .crystal {
   float: left;
 }
 */
-tr:nth-child(even) {
+tr:nth-child(even) .ml_crystal {
     background-color: #EEEEEE;
 }
-tr:nth-child(odd) {
+tr:nth-child(odd) .ml_crystal {
     background-color: #DDDDDD;
 }
-table {
+tr:nth-child(even) .ml_energy {
+    background-color: #EEEEEE;
+}
+tr:nth-child(odd) .ml_energy {
+    background-color: #DDDDDD;
+}
+table.ml {
   width: 100%;
 }
