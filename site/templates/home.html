@@ -173,10 +173,16 @@
           <!-- full bokeh html -->
           {% include 'ajax_plot.html' %}
         </div>
+      {% else %}
+        <div id="ml_figures" class="ml_panel">
+          <h2 class="ml_subtitle">Crystal structure</h2>
+          <p>Crystal string: Al-Na-K-F</p>
+          <img src="static/img/crystal.jpg" id="crystal_template">
+        </div>
       {% endif %}
     {% else %}
-      <div id="ml_output">
-        <h2 class="ml_subtitle">Crystal template</h2>
+      <div id="ml_output" class="ml_panel">
+        <h2 class="ml_subtitle">Crystal structure</h2>
         <img src="static/img/crystal.jpg" id="crystal_template">
       </div>
     {% endif %}

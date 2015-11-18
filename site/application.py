@@ -3,11 +3,13 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+app = Flask(__name__)
+
+from init import app as app
 import ml_engine.converter as converter
 import ml_engine.interface as interface
 import ml_engine.dynamic_plot as pt
 
-app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -53,7 +55,6 @@ def inpProcessor():
     out = [['Optimizing crystals with target value: %f'\
           % float(target)]]
 
-    #pt.plotData()
 
   return render_template("home.html", result=out, mode=mode)
 
@@ -63,8 +64,8 @@ from flask import Response
 @app.route('/data', methods=['GET', 'OPTIONS', 'POST'])
 @pt.crossdomain(origin="*", methods=['GET', 'POST'])
 def hello_world():
-    #global entries
-    entries
+    #entries
+    #from ml_engine.dynamic_plot import entries as entries
     try:
         modified_since = float(
           request.headers.get('If-Modified-Since'))
@@ -74,7 +75,8 @@ def hello_world():
     new_entries = [e for e in entries\
                    if e.creation > modified_since]
     js = json.dumps({'x':[e.x for e in new_entries], 
-                     'y':[e.y for e in new_entries]})
+                     'y':[e.y for e in new_entries],
+                     'cylStr':[tuple(e.cylStr) for e in new_entries]})
     resp = Response(js, status=200, mimetype='application/json')
     print "resp:",
     print resp
@@ -86,7 +88,9 @@ def hello_world():
 
     return resp
 
-
+@app.route('/done')
+def done(out_cylStrLIst):
+  print " yoyo from done"
 
 
 
