@@ -16,7 +16,8 @@ from flask import Flask, jsonify, make_response, request,\
 current_app, Response
 
 Entry = namedtuple('Entry', ['x', 'y', 'creation', 'cylStr'])
-entries = []
+max_length = 500
+entries = deque(maxlen=max_length)
 
 def gen_entry(target=None, NOpt=None, SSpace=None, step=50):
   NOpt = int(NOpt)
@@ -42,11 +43,14 @@ def gen_entry(target=None, NOpt=None, SSpace=None, step=50):
 
 
 def plotData(target, popsize, cylList, step):
+  for s in range(max_length):
+    last_entry = Entry(None, None, None, None)
+    entries.append(last_entry)
   source = AjaxDataSource(data_url='http://localhost:5000/data', 
                           mode="append",
                           if_modified=True, 
                           polling_interval=1000, 
-                          max_size=125)
+                          max_size=max_length)
   output_file('templates/ajax_plot.html')
   hover = HoverTool(
           tooltips=[
