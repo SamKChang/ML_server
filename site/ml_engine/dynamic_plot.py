@@ -46,7 +46,7 @@ def plotData(target, popsize, cylList, step):
   for s in range(max_length):
     last_entry = Entry(None, None, None, None)
     entries.append(last_entry)
-  source = AjaxDataSource(data_url='http://localhost:5000/data', 
+  source = AjaxDataSource(data_url='http://localhost:8080/data', 
                           mode="append",
                           if_modified=True, 
                           polling_interval=1000, 
