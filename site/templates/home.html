@@ -27,16 +27,16 @@
 <html>
   <meta charset="utf-8">
   <html lang="en">
-  <title>ML Server</title>
+  <title>QM Server</title>
   <body>
-    <h1>Crystal Prediction</h1>
+    <h1>Quantum Machine: Elpasolite Crystal Energy Predictions</h1>
 
     <!-- input panel -->
     <div id="ml_input" class="ml_panel">
       <h2 class="ml_subtitle">Input panel</h2>
       <!-- First objective  -->
       <div class="ml_container">
-        <h2 class="ml_title">Single Point Prediction</h2>
+        <h2 class="ml_title">Single Prediction</h2>
         <form id="ml_single" action="." method="POST">
           <label for="crystal" class="ml_field-title"> 
             Crystal component: 
@@ -82,7 +82,7 @@
   
       <!-- Third objective  -->
       <div class="ml_container">
-        <h2 class="ml_title">Crystal Optimization</h2>
+        <h2 class="ml_title">Crystal Design</h2>
         <form id="ml_optimizer" action="." method="POST">
           <label class="ml_field-title" for="oa1"> 
             Elements in first position: 
@@ -178,13 +178,13 @@
       {% else %}
         <div id="ml_figures" class="ml_panel">
           <h2 class="ml_subtitle">Crystal string: Al-Na-K-F</h2>
-          <img src="static/img/crystal.jpg" id="crystal_template">
+          <a href="http://arxiv.org/abs/1508.05315"><img src="static/img/crystal.jpg" id="crystal_template"></a>
         </div>
       {% endif %}
     {% else %}
       <div id="ml_output" class="ml_panel">
         <h2 class="ml_subtitle">Crystal structure</h2>
-        <img src="static/img/crystal.jpg" id="crystal_template">
+        <a href="http://arxiv.org/abs/1508.05315"><img src="static/img/crystal.jpg" id="crystal_template"></a>
       </div>
     {% endif %}
 

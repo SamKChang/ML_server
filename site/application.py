@@ -8,7 +8,9 @@ app = Flask(__name__)
 import ml_engine.converter as converter
 import ml_engine.interface as interface
 import ml_engine.dynamic_plot as pt
+from ml_engine.ml_core.List2Energies import loadMachine
 
+m = loadMachine(True)
 
 @app.route('/')
 def home():
@@ -21,7 +23,7 @@ def inpProcessor():
     # input processing
     cyl = converter.stringConverter(request.form['crystal'])
     # output processing
-    out = interface.outputString([cyl])
+    out = interface.outputString([cyl], m)
   elif 'target' not in request.form: 
     mode = 1
     # input processing
@@ -37,7 +39,7 @@ def inpProcessor():
         )
         cylList = converter.groupConstructor(atoms)
         # output processing
-        out = interface.outputString(cylList)
+        out = interface.outputString(cylList, m)
       else:
         out = [['\nEvery atom site must be specified.']]
   else:
@@ -55,7 +57,7 @@ def inpProcessor():
     popsize = request.form['ml_pop']
     step = request.form['ml_step']
 
-    out = interface.optimizer(target, popsize, cylList, step)
+    out = interface.optimizer(target, popsize, cylList, step, m)
     out = [['\nOptimizing crystals with\n' +\
             'target value: %.2f\n' % float(target) +\
             'total generations: %d\n' % int(step) +\

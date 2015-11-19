@@ -38,9 +38,9 @@ var elementpicker = (function() {
 	weekdays = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
   elist = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S',
            'Cl', 'Ar', 'K', 'Ca', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'In', 'Sn', 'Sb', 
-           'Te', 'I', 'Xe', 'Cs', 'Ba', 'Tl', 'Pb', 'Bi']
+           'Te', 'I', 'Xe', 'Cs', 'Ba', 'Tl', 'Pb', 'Bi', 'All']
 	months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-	daysInMonth = [38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38],
+	daysInMonth = [39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39],
 	suffix = { 1: 'st', 2: 'nd', 3: 'rd', 21: 'st', 22: 'nd', 23: 'rd', 31: 'st' },
 	buildCache = [],
 	handlers = {
@@ -67,7 +67,16 @@ var elementpicker = (function() {
 					break;
 					case 'day':
 						//this.element.value = formatDate(new Date(this.currentYearView, this.currentMonthView, e.target.innerHTML).getTime(), this.config.dateFormat);
-						this.element.value = this.element.value.concat(e.target.innerHTML + ' ');
+            var all_elem = 'All';
+            if (!all_elem.localeCompare(e.target.innerHTML)){
+              var elems = '';
+              for(i=0;i<39;i++){
+                elems = elems.concat(elist[i] + ' ');
+              }
+              this.element.value = elems;
+            }else{
+						  this.element.value = this.element.value.concat(e.target.innerHTML + ' ');
+            }
 						//this.close();
 					break;
 				}
@@ -208,7 +217,10 @@ var elementpicker = (function() {
 	}
 	
 	function isToday(day, currentMonthView, currentYearView) {
+/*
 		return day == date.current.day() && currentMonthView == date.current.month.integer() && currentYearView == date.current.year();
+*/
+    return day == 39+6;
 	}
 	
 	function buildWeekdays() {

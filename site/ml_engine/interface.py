@@ -6,7 +6,7 @@ from ml_core.List2Energies import list2Energy
 import operator
 import dynamic_plot as pt
 
-def outputString(cylList):
+def outputString(cylList, m):
   """
   construct output string
   calling ML engine from here
@@ -41,7 +41,7 @@ def outputString(cylList):
 
   # calculate output
   if supported and atom_count == 4 :
-    E = list2Energy(cylList)
+    E = list2Energy(cylList, m)
     #E = List2Energies([atomList])
     #E = element_dict[atomList[0]][0]
   else:
@@ -53,7 +53,7 @@ def outputString(cylList):
   else:
     return [[cylStrList]]
 
-def optimizer(target, popsize, cylList, step):
+def optimizer(target, popsize, cylList, step, m):
   target = float(target)
   popsize = int(popsize)
   #cylList = [[str(s)] for t in s for s in cylList]
@@ -63,5 +63,5 @@ def optimizer(target, popsize, cylList, step):
       cylList[i] = list(element_dict.iterkeys())
 
   step = int(step)
-  out = pt.plotData(target, popsize, cylList, step)
+  out = pt.plotData(target, popsize, cylList, step, m)
   return out

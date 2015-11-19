@@ -19,9 +19,9 @@ Entry = namedtuple('Entry', ['x', 'y', 'creation', 'cylStr'])
 max_length = 500
 entries = deque(maxlen=max_length)
 
-def gen_entry(target=None, NOpt=None, SSpace=None, step=50):
+def gen_entry(target, NOpt, SSpace, step, m):
   NOpt = int(NOpt)
-  d, popSet, m = prepEve(target,NOpt,SSpace)
+  d, popSet = prepEve(target,NOpt,SSpace, m)
   for i in range(int(step)):
     d.nextPop()
     for ip in d.pop:
@@ -42,7 +42,7 @@ def gen_entry(target=None, NOpt=None, SSpace=None, step=50):
 
 
 
-def plotData(target, popsize, cylList, step):
+def plotData(target, popsize, cylList, step, m):
   for s in range(max_length):
     last_entry = Entry(None, None, None, None)
     entries.append(last_entry)
@@ -66,7 +66,7 @@ def plotData(target, popsize, cylList, step):
   p.xaxis.axis_label = 'Generations'
   p.yaxis.axis_label = 'Best energy [eV/atom]'
   t = Thread(target=gen_entry, 
-  args=(target, popsize, cylList, step,))
+  args=(target, popsize, cylList, step, m,))
   t.daemon = True
   t.start()
   show(p)

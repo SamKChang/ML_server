@@ -91,4 +91,8 @@
 	background-color: #FDF5CE;
 	border: 1px solid #FBCB09;
 }
-
+.calendar td.today span {
+  background-color: #FFF0A5;
+  border: 1px solid #FED22F;
+  color: #363636;
+}
